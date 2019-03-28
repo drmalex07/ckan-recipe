@@ -9,7 +9,7 @@ all:
   children:
     'ckan':
       hosts:
-        'namenode':
+        'ckan':
           ansible_host: ckan.internal
           ansible_port: 22
           fqdn: ckan.internal
