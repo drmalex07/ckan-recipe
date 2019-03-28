@@ -23,5 +23,7 @@
    
    - include: setup-apache-vhosts.yml 
    
+   - include: configure-rsyslog.yml 
+   
    - service: name=apache2.service state=restarted
      become: yes
