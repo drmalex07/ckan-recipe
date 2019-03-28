@@ -1,0 +1,7 @@
+# vim: set ft=yaml:
+
+---
+
+ckan:
+  application_id: 'a0624c7c-a0dd-4972-a3a4-f40032328280'
+  server_name: 'ckan.example.com'

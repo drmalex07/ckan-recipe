@@ -1,0 +1,14 @@
+/vagrant-data/
+/.vagrant
+/keys/id_rsa*
+
+/data
+
+/group_vars/*.yml
+/hosts.yml
+
+/scratch*.yml
+/files/secrets/
+
+/*.retry
+/*.log

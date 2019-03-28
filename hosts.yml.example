@@ -1,0 +1,18 @@
+# vi: set ft=yaml:
+
+---
+
+all:
+  vars:
+    network: '10.17.4.0/24'
+
+  children:
+    'ckan':
+      hosts:
+        'namenode':
+          ansible_host: ckan.internal
+          ansible_port: 22
+          fqdn: ckan.internal
+          hostname: ckan
+          ipv4_address: '10.17.4.45'
+
