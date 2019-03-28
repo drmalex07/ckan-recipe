@@ -21,21 +21,25 @@ Vagrant.configure(2) do |config|
     ckan.vm.network "private_network", ip: h['ipv4_address'] 
     ckan.vm.provider "virtualbox" do |vb|
       vb.name = h['fqdn']
-      vb.memory = 1024
+      vb.memory = 1280
     end
   end
-
-  # Provision (common)
   
   config.vm.provision "file", source: "keys/id_rsa", destination: ".ssh/id_rsa"
-  config.vm.provision "shell", path: "scripts/copy-key.sh", privileged: false
-
   config.vm.provision "file", source: "files/profile", destination: ".profile"
   config.vm.provision "file", source: "files/bashrc", destination: ".bashrc"
   config.vm.provision "file", source: "files/vimrc", destination: ".vimrc"
 
   config.vm.provision "shell", inline: <<-EOD
-    apt-get update && apt-get install -y sudo python
+    apt-get update && apt-get install -y sudo python vim tree bash-completion
   EOD
+
+  config.vm.provision "setup-basic", type: "ansible" do |ansible| 
+    ansible.playbook = 'play-basic.yml'
+    ansible.limit = 'ckan'
+    ansible.become = true
+    ansible.inventory_path = inventory_file
+    ansible.verbose = true
+  end
  
 end

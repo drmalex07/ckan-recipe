@@ -10,7 +10,7 @@ import ckanserviceprovider.web as web
 os.environ['JOB_CONFIG'] = '/etc/ckan/datapusher/config.py'
 
 # Provide a custom CA bundle if needed
-#os.environ['REQUESTS_CA_BUNDLE'] = '/usr/lib/ckan/datapusher/lib/python2.7/site-packages/requests/cacert.pem'
+#os.environ['REQUESTS_CA_BUNDLE'] = '/etc/ckan/datapusher/cacert.pem'
 
 web.init()
 

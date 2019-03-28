@@ -10,14 +10,13 @@ Provide key pair under `keys` (`keys/id_rsa` and `keys/id_rsa.pub`). These keys 
 
 Copy `hosts.yml.example` to `hosts.yml` and edit.
 
-Copy `group_vars/foo.yml.example` to `group_vars/foo.yml` and edit to adjust to your needs.
+Copy `group_vars/{all,ckan}.yml.example` to `group_vars/{all,ckan}.yml` and edit to adjust to your needs.
 
 ## 1. Install
 
-Setup machine:
+Setup machine for the CKAN catalogue (the machine for the database is *not* created here):
     
     vagrant up
-    ansible-playbook -v -u vagrant --become play-basic.yml
 
 Install PostgreSQL database server:
 

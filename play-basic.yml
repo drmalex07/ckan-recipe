@@ -27,11 +27,14 @@
        line: '127.0.1.1 {{ansible_hostname}} {{hostname}}'
        state: present
 
-   - name: Update /etc/hosts with full name
+   - name: Update /etc/hosts with names from inventory
      lineinfile:
        dest: /etc/hosts
-       line: '{{ipv4_address}} {{fqdn}}'
+       line: '{{h.ipv4_address}} {{h.fqdn}} {{h.inventory_hostname}}'
        state: present
+     vars:
+       h: '{{hostvars[item]}}'
+     with_items: '{{groups.all}}'  
 
    - group: name=wheel state=present
    
@@ -62,5 +65,4 @@
      with_items: ['root', 'ubuntu']
      vars:
        u: '{{item}}'
-
 

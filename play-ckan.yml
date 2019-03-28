@@ -12,7 +12,7 @@
  # Setup database 
  #
 
- - hosts: ckan
+ - hosts: database
 
    tasks:
   
@@ -85,7 +85,7 @@
        application_id: '{{ckan.application_id}}'
        server_name: '{{ckan.server_name}}'
        site_url: 'https://{{ckan.server_name}}'
-       db_host: 'localhost'
+       db_host: '{{groups.database| map("extract", hostvars, "inventory_hostname")| first}}'
        oauth2:
          authorization_uri: '{{ckan.oauth2.authorization_uri}}'
          token_uri: '{{ckan.oauth2.token_uri}}'
@@ -100,7 +100,7 @@
  # Fix permissions for datastore
  #
  
- - hosts: ckan
+ - hosts: database
 
    tasks:
 
@@ -117,8 +117,7 @@
    - set_fact:
        datastore_initialized: '{{datastore_initialized_result.stdout| bool}}'
    
-   - shell: >
-       psql --set ON_ERROR_STOP=1 -f /tmp/set-datastore-permissions.sql
+   - shell: psql --set ON_ERROR_STOP=1 -f /tmp/set-datastore-permissions.sql
      when: not datastore_initialized  
      become: yes
      become_user: postgres

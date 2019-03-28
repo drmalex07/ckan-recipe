@@ -27,3 +27,6 @@
    
    - service: name=apache2.service state=restarted
      become: yes
+   
+   - service: name=rsyslog.service state=restarted
+     become: yes
